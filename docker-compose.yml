@@ -1,0 +1,30 @@
+version: '2.1'
+
+services:
+
+  #Governing microservices
+  atm:
+    container_name: atm-module
+    build:
+      context: ./atm
+      dockerfile: Dockerfile
+    image: atm-module
+    restart: always
+    ports:
+      - "127.0.0.1:8080:8080"
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+      - bank
+
+  bank:
+    container_name: bank-module
+    build:
+      context: ./bank
+      dockerfile: Dockerfile
+    image: bank-module
+    restart: always
+    ports:
+      - "127.0.0.1:8082:8082"
+    healthcheck:
+      test: "exit 0"
