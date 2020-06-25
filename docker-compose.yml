@@ -8,12 +8,11 @@ services:
     build:
       context: ./atm
       dockerfile: Dockerfile
-    networks:
-      - bridge
+    network_mode: bridge
     image: atm-module
     restart: always
     ports:
-      - "127.0.0.1:8080:8080"
+      - "http://127.0.0.1:8080:8080"
     healthcheck:
       test: "exit 0"
     depends_on:
@@ -24,11 +23,10 @@ services:
     build:
       context: ./bank
       dockerfile: Dockerfile
-    networks:
-      - bridge
+    network_mode: bridge
     image: bank-module
     restart: always
     ports:
-      - "127.0.0.1:8082:8082"
+      - "http://127.0.0.1:8082:8082"
     healthcheck:
       test: "exit 0"
