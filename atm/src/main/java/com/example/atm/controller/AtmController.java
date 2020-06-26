@@ -1,6 +1,5 @@
 package com.example.atm.controller;
 
-import com.example.atm.model.GetAccountResult;
 import com.example.atm.model.TransactionResult;
 import com.example.atm.service.AtmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,6 @@ public class AtmController {
     //service will do everything from controller, but without specified parameters
     //for docker- google search
 
-    @RequestMapping(value = "/getAccount", method = RequestMethod.GET)
-    public GetAccountResult getAccount() {
-        return service.getAccount();
-    }
-
     @RequestMapping(value = "/withdraw/{withdrawalAmount}", method = RequestMethod.GET)
     public TransactionResult withdraw(@PathVariable("withdrawalAmount") int withdrawalAmount) {
         return service.withdraw(withdrawalAmount);
@@ -30,14 +24,5 @@ public class AtmController {
     @RequestMapping(value = "/deposit/{depositAmount}", method = RequestMethod.GET)
     public TransactionResult deposit(@PathVariable("depositAmount") int depositAmount) {
         return service.deposit(depositAmount);
-    }
-    @RequestMapping(value="/sendUpdate", method = RequestMethod.GET)
-    public TransactionResult sendUpdate() {
-        return service.sendUpdate();
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String sayHello() {
-        return service.sayHello();
     }
 }

@@ -10,8 +10,6 @@ import java.util.Scanner;
 
 @Service
 public class AtmService {
-    private Account account;
-    private Scanner scan = new Scanner(System.in);
 
     private RestTemplate restTemplate = new RestTemplate();
 
