@@ -12,7 +12,7 @@ services:
     image: atm-module
     restart: always
     ports:
-      - "http://127.0.0.1:8080:8080"
+      - "8080:8080"
     healthcheck:
       test: "exit 0"
     depends_on:
@@ -27,6 +27,6 @@ services:
     image: bank-module
     restart: always
     ports:
-      - "http://127.0.0.1:8082:8082"
+      - "8082:8082"
     healthcheck:
       test: "exit 0"
