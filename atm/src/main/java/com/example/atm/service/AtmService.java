@@ -11,18 +11,20 @@ public class AtmService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public TransactionResult withdraw(int withdrawalAmount) {
+    public TransactionResult withdraw(String username, int withdrawalAmount) {
         WithdrawRequest request = new WithdrawRequest();
+        request.setUsername(username);
         request.setWithdrawal(withdrawalAmount);
-        String url = "http://localhost:8082/subtractFunds/" + request.getWithdrawal();
+        String url = "http://localhost:8082/subtractFunds/" + request.getUsername() + "/" + request.getWithdrawal();
         TransactionResult result = restTemplate.getForObject(url, TransactionResult.class);
         return result;
     }
 
-    public TransactionResult deposit(int depositAmount) {
+    public TransactionResult deposit(String username, int depositAmount) {
         DepositRequest request = new DepositRequest();
+        request.setUsername(username);
         request.setDeposit(depositAmount);
-        String url = "http://localhost:8082/addFunds/" + request.getDeposit();
+        String url = "http://localhost:8082/addFunds/" + request.getUsername() + "/" + request.getDeposit();
         TransactionResult result = restTemplate.getForObject(url, TransactionResult.class);
         return result;
     }

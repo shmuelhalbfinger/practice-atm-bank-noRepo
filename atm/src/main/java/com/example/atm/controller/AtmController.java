@@ -16,13 +16,13 @@ public class AtmController {
     //service will do everything from controller, but without specified parameters
     //for docker- google search
 
-    @RequestMapping(value = "/withdraw/{withdrawalAmount}", method = RequestMethod.GET)
-    public TransactionResult withdraw(@PathVariable("withdrawalAmount") int withdrawalAmount) {
-        return service.withdraw(withdrawalAmount);
+    @RequestMapping(value = "/withdraw/{username}/{withdrawalAmount}", method = RequestMethod.GET)
+    public TransactionResult withdraw(@PathVariable("username") String username, @PathVariable("withdrawalAmount") int withdrawalAmount) {
+        return service.withdraw(username, withdrawalAmount);
     }
 
-    @RequestMapping(value = "/deposit/{depositAmount}", method = RequestMethod.GET)
-    public TransactionResult deposit(@PathVariable("depositAmount") int depositAmount) {
-        return service.deposit(depositAmount);
+    @RequestMapping(value = "/deposit/{username}/{depositAmount}", method = RequestMethod.GET)
+    public TransactionResult deposit(@PathVariable("username") String username, @PathVariable("depositAmount") int depositAmount) {
+        return service.deposit(username, depositAmount);
     }
 }

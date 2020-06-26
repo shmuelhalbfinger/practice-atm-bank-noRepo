@@ -13,29 +13,33 @@ public class AccountController {
     @Autowired
     private AccountService service = new AccountService();
 
-    @RequestMapping(value = "/createAccount/{name}/{initialAccountBalance}", method = RequestMethod.GET)
-    public CreateAccountResult createAccount(@PathVariable("name") String name, @PathVariable("initialAccountBalance") int initialAccountBalance) {
-        return service.createAccount(name, initialAccountBalance);
+    @RequestMapping(value = "/createAccount/{username}/{name}/{initialAccountBalance}", method = RequestMethod.GET)
+    public CreateAccountResult createAccount(@PathVariable("username") String username, @PathVariable("name") String name, @PathVariable("initialAccountBalance") int initialAccountBalance) {
+        return service.createAccount(username, name, initialAccountBalance);
     }
 
-    @RequestMapping(value = "/editAccount/{editName}", method = RequestMethod.GET)
-    public EditAccountResult editAccount(@PathVariable("editName") String editName) {
-        return service.editAccount(editName);
+    @RequestMapping(value = "/editAccount/{username}/{editName}", method = RequestMethod.GET)
+    public EditAccountResult editAccount(@PathVariable("username") String username, @PathVariable("editName") String editName) {
+        return service.editAccount(username, editName);
     }
 
-    @RequestMapping(value = "/viewAccount", method = RequestMethod.GET)
-    public ViewAccountResult viewAccount() {
-        return service.viewAccount();
+    @RequestMapping(value = "/viewAccount/{username}", method = RequestMethod.GET)
+    public ViewAccountResult viewAccount(@PathVariable("username") String username) {
+        return service.viewAccount(username);
     }
 
 
-    @RequestMapping(value = "/addFunds/{depositAmount}", method = RequestMethod.GET)
-    public AddFundsResult addFunds(@PathVariable("depositAmount") int depositAmount) {
-        return service.addFunds(depositAmount);
+    @RequestMapping(value = "/addFunds/{username}/{depositAmount}", method = RequestMethod.GET)
+    public AddFundsResult addFunds(@PathVariable("username") String username, @PathVariable("depositAmount") int depositAmount) {
+        return service.addFunds(username, depositAmount);
     }
 
-    @RequestMapping(value = "/subtractFunds/{withdrawalAmount}", method = RequestMethod.GET)
-    public SubtractFundsResult subtractFunds(@PathVariable("withdrawalAmount") int withdrawalAmount) {
-        return service.subtractFunds(withdrawalAmount);
+    @RequestMapping(value = "/subtractFunds/{username}/{withdrawalAmount}", method = RequestMethod.GET)
+    public SubtractFundsResult subtractFunds(@PathVariable("username") String username, @PathVariable("withdrawalAmount") int withdrawalAmount) {
+        return service.subtractFunds(username, withdrawalAmount);
+    }
+    @RequestMapping(value = "/viewAllAccounts", method = RequestMethod.GET)
+    public ViewAllAccountsResult viewAllAccounts() {
+        return service.viewAllAccounts();
     }
 }

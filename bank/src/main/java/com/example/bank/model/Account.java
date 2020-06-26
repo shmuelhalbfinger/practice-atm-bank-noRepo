@@ -1,8 +1,17 @@
 package com.example.bank.model;
 
 public class Account {
+    private String username;
     private String name;
     private int accountBalance;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getName() {
         return name;
