@@ -73,4 +73,12 @@ public class AccountService {
         result.setAccounts(accounts.values());
         return result;
     }
+
+    public DeleteAccountResult deleteAccount(String username) {
+        DeleteAccountResult result = new DeleteAccountResult();
+        result.setDeletedAccountUsername(accounts.get(username).getUsername());
+        accounts.remove(username);
+        return result;
+
+    }
 }

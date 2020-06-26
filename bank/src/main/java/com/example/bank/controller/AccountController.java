@@ -42,4 +42,8 @@ public class AccountController {
     public ViewAllAccountsResult viewAllAccounts() {
         return service.viewAllAccounts();
     }
+    @RequestMapping(value = "/deleteAccount/{username}", method = RequestMethod.GET)
+    public DeleteAccountResult deleteAccount(@PathVariable("username") String username) {
+        return service.deleteAccount(username);
+    }
 }
