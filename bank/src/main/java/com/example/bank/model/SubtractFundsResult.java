@@ -1,6 +1,6 @@
 package com.example.bank.model;
 
-public class UpdateAccountResult {
+public class SubtractFundsResult {
     private int resultBalance;
 
     public int getResultBalance() {

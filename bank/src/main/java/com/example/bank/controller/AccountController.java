@@ -1,9 +1,6 @@
 package com.example.bank.controller;
 
-import com.example.bank.model.CreateAccountResult;
-import com.example.bank.model.EditAccountResult;
-import com.example.bank.model.UpdateAccountResult;
-import com.example.bank.model.ViewAccountResult;
+import com.example.bank.model.*;
 import com.example.bank.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +28,14 @@ public class AccountController {
         return service.viewAccount();
     }
 
-    @RequestMapping(value = "/updateAccount", method = RequestMethod.GET)
-    public UpdateAccountResult updateAccount() {
-        return service.updateAccount();
+
+    @RequestMapping(value = "/addFunds/{depositAmount}", method = RequestMethod.GET)
+    public AddFundsResult addFunds(@PathVariable("depositAmount") int depositAmount) {
+        return service.addFunds(depositAmount);
+    }
+
+    @RequestMapping(value = "/subtractFunds/{withdrawalAmount}", method = RequestMethod.GET)
+    public SubtractFundsResult subtractFunds(@PathVariable("withdrawalAmount") int withdrawalAmount) {
+        return service.subtractFunds(withdrawalAmount);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.bank.model;
 
-public class UpdateAccountRequest {
+public class AddFundsResult {
     private int resultBalance;
 
     public int getResultBalance() {
@@ -10,5 +10,4 @@ public class UpdateAccountRequest {
     public void setResultBalance(int resultBalance) {
         this.resultBalance = resultBalance;
     }
-
 }

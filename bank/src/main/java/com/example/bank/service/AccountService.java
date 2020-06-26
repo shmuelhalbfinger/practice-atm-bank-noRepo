@@ -1,8 +1,6 @@
 package com.example.bank.service;
 
 import com.example.bank.model.*;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,14 +43,20 @@ public class AccountService {
         return result;
     }
 
-    public UpdateAccountResult updateAccount() {
-        String updateAccountUrl = "http://127.0.0.1:8080/sendUpdate";
+    public AddFundsResult addFunds(int depositAmount) {
+        AddFundsRequest request = new AddFundsRequest();
+        request.setDepositAmount(depositAmount);
+        account.setAccountBalance(account.getAccountBalance()-request.getDepositAmount());
+        AddFundsResult result = new AddFundsResult();
+        result.setResultBalance(account.getAccountBalance());
+        return result;
+    }
 
-        UpdateAccountRequest request = restTemplate.getForObject(updateAccountUrl, UpdateAccountRequest.class);
-
-        account.setAccountBalance(request.getResultBalance());
-
-        UpdateAccountResult result = new UpdateAccountResult();
+    public SubtractFundsResult subtractFunds(int withdrawalAmount) {
+        SubtractFundsRequest request = new SubtractFundsRequest();
+        request.setWithdrawalAmount(withdrawalAmount);
+        account.setAccountBalance(account.getAccountBalance()-request.getWithdrawalAmount());
+        SubtractFundsResult result = new SubtractFundsResult();
         result.setResultBalance(account.getAccountBalance());
         return result;
     }

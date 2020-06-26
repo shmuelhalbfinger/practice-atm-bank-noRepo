@@ -10,6 +10,8 @@ services:
       dockerfile: Dockerfile
     network_mode: bridge
     image: atm-module
+    links:
+      - bank
     restart: always
     ports:
       - "8080:8080"
