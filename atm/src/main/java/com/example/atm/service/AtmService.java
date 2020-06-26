@@ -1,12 +1,10 @@
 package com.example.atm.service;
 
-import com.example.atm.model.*;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import com.example.atm.model.DepositRequest;
+import com.example.atm.model.TransactionResult;
+import com.example.atm.model.WithdrawRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Scanner;
 
 @Service
 public class AtmService {
