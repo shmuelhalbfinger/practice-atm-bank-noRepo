@@ -53,7 +53,7 @@ public class AccountService {
     public AddFundsResult addFunds(String username, int depositAmount) {
         AddFundsRequest request = new AddFundsRequest();
         request.setDepositAmount(depositAmount);
-        accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance()-request.getDepositAmount());
+        accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance()+request.getDepositAmount());
         AddFundsResult result = new AddFundsResult();
         result.setResultBalance(accounts.get(username).getAccountBalance());
         return result;
