@@ -3,28 +3,25 @@ package com.example.bank.controller;
 import com.example.bank.model.*;
 import com.example.bank.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AccountController {
     @Autowired
     private AccountService service = new AccountService();
 
-    @RequestMapping(value = "/createAccount/{username}/{name}/{initialAccountBalance}", method = RequestMethod.GET)
-    public CreateAccountResult createAccount(@PathVariable("username") String username, @PathVariable("name") String name, @PathVariable("initialAccountBalance") int initialAccountBalance) {
+    @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
+    public CreateAccountResult createAccount(@RequestHeader String username, @RequestHeader String name, @RequestHeader int initialAccountBalance) {
         return service.createAccount(username, name, initialAccountBalance);
     }
 
-    @RequestMapping(value = "/editAccount/{username}/{editName}", method = RequestMethod.GET)
-    public EditAccountResult editAccount(@PathVariable("username") String username, @PathVariable("editName") String editName) {
+    @RequestMapping(value = "/editAccount/", method = RequestMethod.POST)
+    public EditAccountResult editAccount(@RequestHeader String username, @RequestHeader String editName) {
         return service.editAccount(username, editName);
     }
 
-    @RequestMapping(value = "/viewAccount/{username}", method = RequestMethod.GET)
-    public ViewAccountResult viewAccount(@PathVariable("username") String username) {
+    @RequestMapping(value = "/viewAccount", method = RequestMethod.GET)
+    public ViewAccountResult viewAccount(@RequestHeader String username) {
         return service.viewAccount(username);
     }
 
@@ -38,12 +35,17 @@ public class AccountController {
     public SubtractFundsResult subtractFunds(@PathVariable("username") String username, @PathVariable("withdrawalAmount") int withdrawalAmount) {
         return service.subtractFunds(username, withdrawalAmount);
     }
-    @RequestMapping(value = "/viewAllAccounts", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewAllAccounts", method = RequestMethod.POST)
     public ViewAllAccountsResult viewAllAccounts() {
         return service.viewAllAccounts();
     }
-    @RequestMapping(value = "/deleteAccount/{username}", method = RequestMethod.GET)
-    public DeleteAccountResult deleteAccount(@PathVariable("username") String username) {
+    @RequestMapping(value = "/deleteAccount", method = RequestMethod.POST)
+    public DeleteAccountResult deleteAccount(@RequestHeader String username) {
         return service.deleteAccount(username);
+    }
+
+    @RequestMapping(value = "/sayHello", method = RequestMethod.POST)
+    public String sayHello(@RequestHeader String name) {
+        return "Hello " + name;
     }
 }
