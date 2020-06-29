@@ -39,6 +39,7 @@ public class AccountController {
     public ViewAllAccountsResult viewAllAccounts() {
         return service.viewAllAccounts();
     }
+
     @RequestMapping(value = "/deleteAccount", method = RequestMethod.POST)
     public DeleteAccountResult deleteAccount(@RequestHeader String username) {
         return service.deleteAccount(username);
