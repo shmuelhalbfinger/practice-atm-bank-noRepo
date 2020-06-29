@@ -21,7 +21,7 @@ public class AtmService {
         headers.set("username", username);
         headers.set("withdrawalAmount", String.valueOf(withdrawalAmount));
         HttpEntity<String> entityRequest = new HttpEntity<>(headers);
-        String url = "http://172.21.0.3:8082/subtractFunds";
+        String url = "http://172.21.0.2:8082/subtractFunds";
         TransactionResult result = restTemplate.postForObject(url, entityRequest, TransactionResult.class);
         return result;
     }
@@ -34,7 +34,7 @@ public class AtmService {
         headers.set("username", username);
         headers.set("withdrawalAmount", String.valueOf(depositAmount));
         HttpEntity<String> entityRequest = new HttpEntity<>(headers);
-        String url = "http://172.21.0.3:8082/addFunds";
+        String url = "http://172.21.0.2:8082/addFunds";
         TransactionResult result = restTemplate.postForObject(url, entityRequest, TransactionResult.class);
         return result;
     }
