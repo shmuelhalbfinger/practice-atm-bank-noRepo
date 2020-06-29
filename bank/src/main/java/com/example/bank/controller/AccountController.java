@@ -6,12 +6,15 @@ import com.example.bank.exceptionhandler.ImproperBalanceException;
 import com.example.bank.model.*;
 import com.example.bank.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AccountController {
     @Autowired
-    private AccountService service = new AccountService();
+    private final AccountService service = new AccountService();
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
     public CreateAccountResult createAccount(@RequestHeader String username, @RequestHeader String name, @RequestHeader int initialAccountBalance) throws DuplicateAccountException {
@@ -37,6 +40,7 @@ public class AccountController {
     public SubtractFundsResult subtractFunds(@RequestHeader String username, @RequestHeader int withdrawalAmount) throws AccountNotFoundException, ImproperBalanceException {
         return service.subtractFunds(username, withdrawalAmount);
     }
+
     @RequestMapping(value = "/viewAllAccounts", method = RequestMethod.POST)
     public ViewAllAccountsResult viewAllAccounts() {
         return service.viewAllAccounts();

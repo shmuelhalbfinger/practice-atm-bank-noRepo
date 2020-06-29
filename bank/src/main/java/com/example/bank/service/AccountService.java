@@ -11,9 +11,9 @@ import java.util.HashMap;
 
 @Service
 public class AccountService {
-    private HashMap<String,Account> accounts = new HashMap<>();
+    private final HashMap<String, Account> accounts = new HashMap<>();
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public CreateAccountResult createAccount(String username, String name, int initialAccountBalance) throws DuplicateAccountException {
         if (accounts.containsKey(username))
@@ -64,7 +64,7 @@ public class AccountService {
             throw new AccountNotFoundException("Account with this username doesn't exist");
         AddFundsRequest request = new AddFundsRequest();
         request.setDepositAmount(depositAmount);
-        accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance()+request.getDepositAmount());
+        accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance() + request.getDepositAmount());
         AddFundsResult result = new AddFundsResult();
         result.setResultBalance(accounts.get(username).getAccountBalance());
         return result;
@@ -77,7 +77,7 @@ public class AccountService {
         request.setWithdrawalAmount(withdrawalAmount);
         if (accounts.get(username).getAccountBalance() - request.getWithdrawalAmount() < 0)
             throw new ImproperBalanceException("Withdrawal Amount exceeds current balance of " + accounts.get(username).getAccountBalance() + ". Please add more funds to withdraw this amount");
-        accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance()-request.getWithdrawalAmount());
+        accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance() - request.getWithdrawalAmount());
         SubtractFundsResult result = new SubtractFundsResult();
         result.setResultBalance(accounts.get(username).getAccountBalance());
         return result;
