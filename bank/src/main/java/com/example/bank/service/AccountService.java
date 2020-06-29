@@ -1,5 +1,8 @@
 package com.example.bank.service;
 
+import com.example.bank.exceptionhandler.AccountNotFoundException;
+import com.example.bank.exceptionhandler.DuplicateAccountException;
+import com.example.bank.exceptionhandler.ImproperBalanceException;
 import com.example.bank.model.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,7 +15,9 @@ public class AccountService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public CreateAccountResult createAccount(String username, String name, int initialAccountBalance) {
+    public CreateAccountResult createAccount(String username, String name, int initialAccountBalance) throws DuplicateAccountException {
+        if (accounts.containsKey(username))
+            throw new DuplicateAccountException("Account with this username already exists");
         Account account = new Account();
         CreateAccountRequest request = new CreateAccountRequest();
         request.setUsername(username);
@@ -29,7 +34,9 @@ public class AccountService {
         return result;
     }
 
-    public EditAccountResult editAccount(String username, String editName) {
+    public EditAccountResult editAccount(String username, String editName) throws AccountNotFoundException {
+        if (!accounts.containsKey(username))
+            throw new AccountNotFoundException("Account with this username doesn't exist");
         EditAccountRequest request = new EditAccountRequest();
         request.setEditName(editName);
         accounts.get(username).setName(editName);
@@ -38,7 +45,9 @@ public class AccountService {
         return result;
     }
 
-    public ViewAccountResult viewAccount(String username) {
+    public ViewAccountResult viewAccount(String username) throws AccountNotFoundException {
+        if (!accounts.containsKey(username))
+            throw new AccountNotFoundException("Account with this username doesn't exist");
         ViewAccountRequest request = new ViewAccountRequest();
         request.setUsername(accounts.get(username).getUsername());
         request.setName(accounts.get(username).getName());
@@ -50,7 +59,9 @@ public class AccountService {
         return result;
     }
 
-    public AddFundsResult addFunds(String username, int depositAmount) {
+    public AddFundsResult addFunds(String username, int depositAmount) throws AccountNotFoundException {
+        if (!accounts.containsKey(username))
+            throw new AccountNotFoundException("Account with this username doesn't exist");
         AddFundsRequest request = new AddFundsRequest();
         request.setDepositAmount(depositAmount);
         accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance()+request.getDepositAmount());
@@ -59,9 +70,13 @@ public class AccountService {
         return result;
     }
 
-    public SubtractFundsResult subtractFunds(String username, int withdrawalAmount) {
+    public SubtractFundsResult subtractFunds(String username, int withdrawalAmount) throws AccountNotFoundException, ImproperBalanceException {
+        if (!accounts.containsKey(username))
+            throw new AccountNotFoundException("Account with this username doesn't exist");
         SubtractFundsRequest request = new SubtractFundsRequest();
         request.setWithdrawalAmount(withdrawalAmount);
+        if (accounts.get(username).getAccountBalance() - request.getWithdrawalAmount() < 0)
+            throw new ImproperBalanceException("Withdrawal Amount exceeds current balance of " + accounts.get(username).getAccountBalance() + ". Please add more funds to withdraw this amount");
         accounts.get(username).setAccountBalance(accounts.get(username).getAccountBalance()-request.getWithdrawalAmount());
         SubtractFundsResult result = new SubtractFundsResult();
         result.setResultBalance(accounts.get(username).getAccountBalance());
@@ -74,7 +89,9 @@ public class AccountService {
         return result;
     }
 
-    public DeleteAccountResult deleteAccount(String username) {
+    public DeleteAccountResult deleteAccount(String username) throws AccountNotFoundException {
+        if (!accounts.containsKey(username))
+            throw new AccountNotFoundException("Account with this username doesn't exist");
         DeleteAccountResult result = new DeleteAccountResult();
         result.setDeletedAccountUsername(accounts.get(username).getUsername());
         accounts.remove(username);

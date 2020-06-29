@@ -1,5 +1,8 @@
 package com.example.bank.controller;
 
+import com.example.bank.exceptionhandler.AccountNotFoundException;
+import com.example.bank.exceptionhandler.DuplicateAccountException;
+import com.example.bank.exceptionhandler.ImproperBalanceException;
 import com.example.bank.model.*;
 import com.example.bank.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +14,27 @@ public class AccountController {
     private AccountService service = new AccountService();
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-    public CreateAccountResult createAccount(@RequestHeader String username, @RequestHeader String name, @RequestHeader int initialAccountBalance) {
+    public CreateAccountResult createAccount(@RequestHeader String username, @RequestHeader String name, @RequestHeader int initialAccountBalance) throws DuplicateAccountException {
         return service.createAccount(username, name, initialAccountBalance);
     }
 
     @RequestMapping(value = "/editAccount", method = RequestMethod.POST)
-    public EditAccountResult editAccount(@RequestHeader String username, @RequestHeader String editName) {
+    public EditAccountResult editAccount(@RequestHeader String username, @RequestHeader String editName) throws AccountNotFoundException {
         return service.editAccount(username, editName);
     }
 
     @RequestMapping(value = "/viewAccount", method = RequestMethod.POST)
-    public ViewAccountResult viewAccount(@RequestHeader String username) {
+    public ViewAccountResult viewAccount(@RequestHeader String username) throws AccountNotFoundException {
         return service.viewAccount(username);
     }
 
-
-    @RequestMapping(value = "/addFunds/{username}/{depositAmount}", method = RequestMethod.GET)
-    public AddFundsResult addFunds(@PathVariable("username") String username, @PathVariable("depositAmount") int depositAmount) {
+    @RequestMapping(value = "/addFunds", method = RequestMethod.POST)
+    public AddFundsResult addFunds(@RequestHeader String username, @RequestHeader int depositAmount) throws AccountNotFoundException {
         return service.addFunds(username, depositAmount);
     }
 
     @RequestMapping(value = "/subtractFunds", method = RequestMethod.POST)
-    public SubtractFundsResult subtractFunds(@RequestHeader String username, @RequestHeader int withdrawalAmount) {
+    public SubtractFundsResult subtractFunds(@RequestHeader String username, @RequestHeader int withdrawalAmount) throws AccountNotFoundException, ImproperBalanceException {
         return service.subtractFunds(username, withdrawalAmount);
     }
     @RequestMapping(value = "/viewAllAccounts", method = RequestMethod.POST)
@@ -41,12 +43,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/deleteAccount", method = RequestMethod.POST)
-    public DeleteAccountResult deleteAccount(@RequestHeader String username) {
+    public DeleteAccountResult deleteAccount(@RequestHeader String username) throws AccountNotFoundException {
         return service.deleteAccount(username);
-    }
-
-    @RequestMapping(value = "/sayHello", method = RequestMethod.POST)
-    public String sayHello(@RequestHeader String name) {
-        return "Hello " + name;
     }
 }
