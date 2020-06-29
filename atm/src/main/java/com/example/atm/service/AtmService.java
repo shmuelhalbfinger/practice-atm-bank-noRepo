@@ -15,7 +15,7 @@ public class AtmService {
         WithdrawRequest request = new WithdrawRequest();
         request.setUsername(username);
         request.setWithdrawal(withdrawalAmount);
-        String url = "http://172.21.0.2:8082/subtractFunds/" + request.getUsername() + "/" + request.getWithdrawal();
+        String url = "http://172.21.0.3:8082/subtractFunds/" + request.getUsername() + "/" + request.getWithdrawal();
         TransactionResult result = restTemplate.getForObject(url, TransactionResult.class);
         return result;
     }
@@ -24,7 +24,7 @@ public class AtmService {
         DepositRequest request = new DepositRequest();
         request.setUsername(username);
         request.setDeposit(depositAmount);
-        String url = "http://172.21.0.2:8082/addFunds/" + request.getUsername() + "/" + request.getDeposit();
+        String url = "http://172.21.0.3:8082/addFunds/" + request.getUsername() + "/" + request.getDeposit();
         TransactionResult result = restTemplate.getForObject(url, TransactionResult.class);
         return result;
     }
