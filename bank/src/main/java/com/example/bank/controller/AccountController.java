@@ -31,8 +31,8 @@ public class AccountController {
         return service.addFunds(username, depositAmount);
     }
 
-    @RequestMapping(value = "/subtractFunds/{username}/{withdrawalAmount}", method = RequestMethod.GET)
-    public SubtractFundsResult subtractFunds(@PathVariable("username") String username, @PathVariable("withdrawalAmount") int withdrawalAmount) {
+    @RequestMapping(value = "/subtractFunds", method = RequestMethod.POST)
+    public SubtractFundsResult subtractFunds(@RequestHeader String username, @RequestHeader int withdrawalAmount) {
         return service.subtractFunds(username, withdrawalAmount);
     }
     @RequestMapping(value = "/viewAllAccounts", method = RequestMethod.POST)
