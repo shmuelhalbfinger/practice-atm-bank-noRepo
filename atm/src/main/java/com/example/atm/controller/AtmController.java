@@ -13,12 +13,12 @@ public class AtmController {
     //service will do everything from controller, but without specified parameters
     //for docker- google search
 
-    @RequestMapping(value = "/withdraw", method = RequestMethod.GET)
+    @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
     public TransactionResult withdraw(@RequestHeader String username, @RequestHeader int withdrawalAmount) {
         return service.withdraw(username, withdrawalAmount);
     }
 
-    @RequestMapping(value = "/deposit", method = RequestMethod.GET)
+    @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public TransactionResult deposit(@RequestHeader String username, @RequestHeader int depositAmount) {
         return service.deposit(username, depositAmount);
     }

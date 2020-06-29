@@ -20,7 +20,7 @@ public class AccountController {
         return service.editAccount(username, editName);
     }
 
-    @RequestMapping(value = "/viewAccount", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewAccount", method = RequestMethod.POST)
     public ViewAccountResult viewAccount(@RequestHeader String username) {
         return service.viewAccount(username);
     }
