@@ -15,7 +15,7 @@ public class AccountController {
         return service.createAccount(username, name, initialAccountBalance);
     }
 
-    @RequestMapping(value = "/editAccount/", method = RequestMethod.POST)
+    @RequestMapping(value = "/editAccount", method = RequestMethod.POST)
     public EditAccountResult editAccount(@RequestHeader String username, @RequestHeader String editName) {
         return service.editAccount(username, editName);
     }
