@@ -2,7 +2,7 @@ package com.example.atm.model;
 
 public class DepositRequest {
     private String username;
-    private int deposit;
+    private int depositAmount;
 
     public String getUsername() {
         return username;
@@ -12,11 +12,11 @@ public class DepositRequest {
         this.username = username;
     }
 
-    public int getDeposit() {
-        return deposit;
+    public int getDepositAmount() {
+        return depositAmount;
     }
 
-    public void setDeposit(int deposit) {
-        this.deposit = deposit;
+    public void setDepositAmount(int depositAmount) {
+        this.depositAmount = depositAmount;
     }
 }

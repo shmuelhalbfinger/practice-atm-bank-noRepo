@@ -2,7 +2,7 @@ package com.example.atm.model;
 
 public class WithdrawRequest {
     private String username;
-    private int withdrawal;
+    private int withdrawalAmount;
 
     public String getUsername() {
         return username;
@@ -12,12 +12,11 @@ public class WithdrawRequest {
         this.username = username;
     }
 
-    public int getWithdrawal() {
-        return withdrawal;
+    public int getWithdrawalAmount() {
+        return withdrawalAmount;
     }
 
-    public void setWithdrawal(int withdrawal) {
-        this.withdrawal = withdrawal;
+    public void setWithdrawalAmount(int withdrawalAmount) {
+        this.withdrawalAmount = withdrawalAmount;
     }
-
 }

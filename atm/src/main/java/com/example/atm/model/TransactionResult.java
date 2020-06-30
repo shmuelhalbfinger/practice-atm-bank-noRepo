@@ -1,7 +1,7 @@
 package com.example.atm.model;
 
 public class TransactionResult {
-    int resultBalance;
+    private int resultBalance;
 
     public int getResultBalance() {
         return resultBalance;
