@@ -1,0 +1,37 @@
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-module
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank-module
+  template:
+    metadata:
+      labels:
+        app: bank-module
+    spec:
+      containers:
+        - name: bank-module
+          image: shmuelhalbfinger/practiceatmbankapp:bank-module
+          ports:
+            - containerPort: 8082
+          imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: bank-module
+spec:
+  selector:
+    app: bank-module
+  ports:
+    - port: 8082
+      targetPort: 8082
+  type: LoadBalancer

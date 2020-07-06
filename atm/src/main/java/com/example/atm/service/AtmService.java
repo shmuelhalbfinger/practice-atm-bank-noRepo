@@ -4,8 +4,6 @@ import com.example.atm.model.DepositRequest;
 import com.example.atm.model.TransactionResult;
 import com.example.atm.model.WithdrawRequest;
 import net.minidev.json.JSONObject;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +16,7 @@ public class AtmService {
         JSONObject obj = new JSONObject();
         obj.put("username", request.getUsername());
         obj.put("withdrawalAmount", request.getWithdrawalAmount());
-        String url = "http://172.21.0.2:8082/subtractFunds";
+        String url = "http://10.109.43.15:8082/subtractFunds";
         TransactionResult result = restTemplate.postForObject(url, obj, TransactionResult.class);
         return result;
     }
@@ -27,7 +25,7 @@ public class AtmService {
         JSONObject obj = new JSONObject();
         obj.put("username", request.getUsername());
         obj.put("depositAmount", request.getDepositAmount());
-        String url = "http://172.21.0.2:8082/addFunds";
+        String url = "http://10.109.43.15:8082/addFunds";
         TransactionResult result = restTemplate.postForObject(url, obj, TransactionResult.class);
         return result;
     }
