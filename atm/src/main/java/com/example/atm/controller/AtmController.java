@@ -21,4 +21,9 @@ public class AtmController {
     public TransactionResult deposit(@RequestBody DepositRequest request) {
         return service.deposit(request);
     }
+
+    @RequestMapping(value = "/sayHello", method = RequestMethod.POST)
+    public String sayHello(@RequestBody String name) {
+        return service.sayHello(name);
+    }
 }

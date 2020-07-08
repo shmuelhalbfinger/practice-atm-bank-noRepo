@@ -17,9 +17,10 @@ spec:
     spec:
       containers:
         - name: atm-module
-          image: shmuelhalbfinger/practiceatmbankapp:bank-module
+          image: shmuelhalbfinger/practiceatmbankapp:atm-module
           ports:
             - containerPort: 8080
+              name: atm-module
           imagePullPolicy: Always
 
 ---
@@ -32,6 +33,8 @@ spec:
   selector:
     app: atm-module
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 8080
-  type: LoadBalancer
+      nodePort: 31235
+      protocol: TCP
+  type: NodePort
