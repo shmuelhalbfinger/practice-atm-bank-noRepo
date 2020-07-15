@@ -1,6 +1,5 @@
 package com.example.atm.controller;
 
-
 import com.example.atm.model.DepositRequest;
 import com.example.atm.model.TransactionResult;
 import com.example.atm.model.WithdrawRequest;
