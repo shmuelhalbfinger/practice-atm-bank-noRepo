@@ -33,4 +33,8 @@ public class AtmService {
     public String sayHello(String name) {
         return "Hello " + name + "!";
     }
+
+    public String confirm() {
+        return "confirmed";
+    }
 }
