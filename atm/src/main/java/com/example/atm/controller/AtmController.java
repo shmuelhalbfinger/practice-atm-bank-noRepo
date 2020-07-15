@@ -27,7 +27,7 @@ public class AtmController {
         return service.sayHello(name);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String confirm() {
         return service.confirm();
     }
