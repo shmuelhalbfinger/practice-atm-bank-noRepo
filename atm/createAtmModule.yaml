@@ -4,23 +4,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: atm-module
+  name: atm-module2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: atm-module
+      app: atm-module2
   template:
     metadata:
       labels:
-        app: atm-module
+        app: atm-module2
     spec:
       containers:
-        - name: atm-module
-          image: shmuelhalbfinger/practiceatmbankapp:atm-module
+        - name: atm-module2
+          image: shmuelhalbfinger/practiceatmbankapp:atm-module2
           ports:
             - containerPort: 8080
-              name: atm-module
+              name: atm-module2
           imagePullPolicy: Always
 
 ---
@@ -28,10 +28,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: atm-module
+  name: atm-module2
 spec:
   selector:
-    app: atm-module
+    app: atm-module2
   ports:
     - port: 80
       targetPort: 8080

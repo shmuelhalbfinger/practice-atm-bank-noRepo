@@ -4,23 +4,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bank-module
+  name: bank-module2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: bank-module
+      app: bank-module2
   template:
     metadata:
       labels:
-        app: bank-module
+        app: bank-module2
     spec:
       containers:
-        - name: bank-module
-          image: shmuelhalbfinger/practiceatmbankapp:bank-module
+        - name: bank-module2
+          image: shmuelhalbfinger/practiceatmbankapp:bank-module2
           ports:
             - containerPort: 8082
-              name: bank-module
+              name: bank-module2
           imagePullPolicy: Always
 
 ---
@@ -28,10 +28,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bank-module
+  name: bank-module2
 spec:
   selector:
-    app: bank-module
+    app: bank-module2
   ports:
     - port: 80
       targetPort: 8082
@@ -53,6 +53,6 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: bank-module
+              serviceName: bank-module2
               servicePort: 31234
             path: /bank
