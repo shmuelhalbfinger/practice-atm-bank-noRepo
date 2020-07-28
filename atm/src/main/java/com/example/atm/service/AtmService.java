@@ -18,7 +18,7 @@ public class AtmService {
         JSONObject obj = new JSONObject();
         obj.put("username", request.getUsername());
         obj.put("withdrawalAmount", request.getWithdrawalAmount());
-        String url = "https://172.18.0.2:8082/subtractFunds";
+        String url = "http://172.18.0.2:8082/subtractFunds";
         TransactionResult result = restTemplate.postForObject(url, obj, TransactionResult.class);
         return result;
     }
@@ -27,7 +27,7 @@ public class AtmService {
         JSONObject obj = new JSONObject();
         obj.put("username", request.getUsername());
         obj.put("depositAmount", request.getDepositAmount());
-        String url = "https://172.18.0.2:8082/addFunds";
+        String url = "http://172.18.0.2:8082/addFunds";
         TransactionResult result = restTemplate.postForObject(url, obj, TransactionResult.class);
         return result;
     }
