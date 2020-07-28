@@ -10,13 +10,15 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class AtmService {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+
+    private RestTemplate restTemplate = new RestTemplate();
+
 
     public TransactionResult withdraw(WithdrawRequest request) {
         JSONObject obj = new JSONObject();
         obj.put("username", request.getUsername());
         obj.put("withdrawalAmount", request.getWithdrawalAmount());
-        String url = "http://172.18.0.2:8082/subtractFunds";
+        String url = "https://172.18.0.2:8082/subtractFunds";
         TransactionResult result = restTemplate.postForObject(url, obj, TransactionResult.class);
         return result;
     }
@@ -25,7 +27,7 @@ public class AtmService {
         JSONObject obj = new JSONObject();
         obj.put("username", request.getUsername());
         obj.put("depositAmount", request.getDepositAmount());
-        String url = "http://172.18.0.2:8082/addFunds";
+        String url = "https://172.18.0.2:8082/addFunds";
         TransactionResult result = restTemplate.postForObject(url, obj, TransactionResult.class);
         return result;
     }
