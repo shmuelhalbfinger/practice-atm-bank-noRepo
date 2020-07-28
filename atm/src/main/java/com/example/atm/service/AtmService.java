@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class AtmService {
 
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
 
     public TransactionResult withdraw(WithdrawRequest request) {
